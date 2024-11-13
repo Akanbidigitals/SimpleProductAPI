@@ -52,12 +52,12 @@ namespace SimpleProductAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPut("UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct (UpdateProductDto update)
+        [HttpPut("UpdateProduct/{Id}")]
+        public async Task<IActionResult> UpdateProduct ([FromBody]UpdateProductDto update,Guid Id)
         {
             try
             {
-                var res = await _repo.UpdateProduct(update);
+                var res = await _repo.UpdateProduct(update,Id);
                 return Ok(res);
             }catch(Exception ex)
             {

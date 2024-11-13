@@ -90,17 +90,17 @@ namespace SimpleProductAPI.DataAccess.Repository
             }
         }
 
-        public async Task<string> UpdateProduct(UpdateProductDto product)
+        public async Task<string> UpdateProduct(UpdateProductDto product, Guid id)
         {
             try
             {
-                var checkProduct = await _ctx.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
+                var checkProduct = await _ctx.Products.FirstOrDefaultAsync(x => x.Id == id);
                 if(checkProduct is null)
                 {
                     throw new Exception("Product does not exist");
 
                 }
-                checkProduct.Id = product.Id;
+                
                 checkProduct.Name = product.Name ?? checkProduct.Name;
                 checkProduct.Price = product.Price ?? checkProduct.Price;
 
